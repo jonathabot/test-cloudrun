@@ -1,24 +1,20 @@
-FROM node:18-alpine AS build
-
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm install
-
-COPY . .
-
-RUN npm run build
-
-FROM node:18-alpine
-
-WORKDIR /app
-
-COPY --from=build /app ./
-
-RUN npm install --production
-
-ENV PORT 8080
-
-EXPOSE 8080
-
-CMD ["npm", "start"]
+{
+  "name": "cloudrun",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "next": "15.4.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "tailwindcss": "^4"
+  }
+}

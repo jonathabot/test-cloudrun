@@ -11,12 +11,14 @@ RUN npm run build
 
 FROM node:18-alpine
 
-RUN npm install -g serve
-
 WORKDIR /app
 
-COPY --from=build /app/build ./build
+COPY --from=build /app ./
+
+RUN npm install --production
+
+ENV PORT 8080
 
 EXPOSE 8080
 
-CMD ["serve", "-s", "build", "-l", "8080"]
+CMD ["npm", "start"]
